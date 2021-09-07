@@ -1,0 +1,14 @@
+on: issue_comment
+
+jobs:
+  issue_commented:
+    # This job only runs for issue comments
+    name: Issue comment
+    if: ${{ !github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify
+        uses: nobrayner/discord-webhook@v1
+        with:
+          github-token: ${{ secrets.github_token }}
+          discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
